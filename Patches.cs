@@ -67,6 +67,20 @@ public static class AudioManagerPatch
        
         //UIEventManager.Inst.ExecUIEvent("apply_menu_music");
     }
+
+    
+    [HarmonyPatch(nameof(AudioManager.PlayMusic), typeof(string), typeof(bool))]
+    [HarmonyPrefix]
+    static bool PrePlayMusic(AudioManager __instance, string _musicName)
+    {
+        if (__instance.currentSongGroup == "corruption" && _musicName == "arcade_dream")
+        {
+            __instance.currentSongGroup = "";
+            return !Plugin.ChooseSong();
+        }
+        
+        return true;
+    }
 }
 
 [HarmonyPatch(typeof(UIElement))]

@@ -12,7 +12,7 @@ namespace CustomMenuSongs;
 
 [BepInPlugin(Guid, Name, Version)]
 [BepInProcess("Project Arrhythmia.exe")]
-
+[BepInDependency("me.ytarame.PaApi")]
 public class Plugin : BaseUnityPlugin
 {
     public static List<AudioClip> CustomSongs = new();
@@ -28,7 +28,7 @@ public class Plugin : BaseUnityPlugin
     {
         Logger = base.Logger;
         
-        string songsPath = Paths.PluginPath + "\\CustomMenuSongs";
+        string songsPath = Paths.GameRootPath + "\\CustomMenuSongs";
         
         if (!Directory.Exists(songsPath))
         {
