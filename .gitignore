@@ -5,3 +5,5 @@ obj/
 .md
 .idea/
 *.user
+*.dll
+*.zip

@@ -60,4 +60,9 @@
       <HintPath>lib\UnityEngine.UnityWebRequestModule.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+    <Target Name="PackageMod" AfterTargets="PostBuildEvent">
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="../thunderstore/plugins" />
+        <ZipDirectory SourceDirectory="../thunderstore/" DestinationFile="../$(MSBuildProjectName)--$(Configuration).zip" Overwrite="true" />
+    </Target>
 </Project>

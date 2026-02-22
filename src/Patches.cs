@@ -36,16 +36,16 @@ public static class AudioManagerPatch
 {
     private static bool _hasInitialized;
     
-    [HarmonyPatch(nameof(AudioManager.OnAwake))]
+    [HarmonyPatch(nameof(AudioManager.Start))]
     [HarmonyPostfix]
     static void PostStart(AudioManager __instance)
     {
         if (_hasInitialized) return;
         _hasInitialized = true;
         
-        Plugin.CustomSongs.AddRange(__instance.library.musicClips["menu"].music);
+        Plugin.CustomSongs.AddRange(__instance.library.musicClips["Menu Theme (Corrupted) - Corrupted"].music);
    
-        List<AudioClip> songs = new(__instance.library.musicClips["arcade_dream"].music);
+        List<AudioClip> songs = new(__instance.library.musicClips["Menu Theme - Whole"].music);
         songs.AddRange(Plugin.CustomSongs);
    
         __instance.library.musicClips.Add(
@@ -58,7 +58,7 @@ public static class AudioManagerPatch
         
         foreach (var customSong in Plugin.CustomSongs)
         {
-              __instance.library.musicClips.Add(
+            __instance.library.musicClips.TryAdd(
                 customSong.name, 
                 new SoundLibrary.MusicGroup(){music = [customSong] });
         }
@@ -73,8 +73,9 @@ public static class AudioManagerPatch
     [HarmonyPrefix]
     static bool PrePlayMusic(AudioManager __instance, string _musicName)
     {
-        if (__instance.currentSongGroup == "corruption" && _musicName == "arcade_dream")
+        if (__instance.currentSongGroup == "Menu Theme (Corrupted) - Corrupted" && _musicName == "Menu Theme - Whole")
         {
+            Plugin.Logger.LogInfo("Setting up menu song");
             __instance.currentSongGroup = "";
             return !Plugin.ChooseSong();
         }
@@ -100,6 +101,7 @@ internal static class SplashScreenPatch
             return false;
         }
 
+        Plugin.Logger.LogError("HAHA");
         return !Plugin.ChooseSong();
     }
 }

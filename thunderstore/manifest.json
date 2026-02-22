@@ -1,0 +1,10 @@
+{
+  "name": "CustomMenuSongs",
+  "version_number": "1.0.1",
+  "website_url": "https://github.com/Aiden-ytarame/CustomMenuSongs/",
+  "description": "Lets the user add local songs to the game",
+  "dependencies": [
+    "BepInEx-BepInExPack-5.4.2304",
+    "aiden_ytarame-PaApi-1.0.0"
+  ]
+}

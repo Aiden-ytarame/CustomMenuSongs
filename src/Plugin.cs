@@ -22,7 +22,7 @@ public class Plugin : BaseUnityPlugin
     Harmony _harmony;
     const string Guid = "me.ytarame.CustomMenuSong";
     const string Name = "CustomMenuSong";
-    const string Version = "1.0.0";
+    const string Version = "1.0.1";
 
     private void Awake()
     {
